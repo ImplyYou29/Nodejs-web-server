@@ -1,13 +1,13 @@
 var express = require('express');
 var middleware = require('./middleware');
 var app = express();
-var port = 2000;
+var port = process.env.PORT || 2000;
 
 // app.get('/', (request, response) => {
 //     response.send("merhaba");
 // }) artık direk app.use ile kullandığımız sayfa karşımıza çıkacak
 //app.use(middleware.requireauthentication); buraya girersek her sayfa içni söyler
-app.get("/hakkimda", middleware.requireauthentication, (request, response) => {
+app.get("/hakkimda", middleware.logger, middleware.requireauthentication, (request, response) => {
         response.send("hakkımda sekmesi");
     }) //bunlar routedir
 app.get("/blog", middleware.logger, (request, response) => {
